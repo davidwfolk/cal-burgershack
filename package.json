@@ -1,0 +1,15 @@
+{
+  "name": "burgershack",
+  "version": "1.0.0",
+  "description": "this is a small api that lets you retrieve burgers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "darrylkilzer@gmail.com <Darryl Kilzer Jr>",
+  "license": "ISC",
+  "dependencies": {
+    "esm": "^3.2.25",
+    "express": "^4.17.1"
+  }
+}
