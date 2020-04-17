@@ -1,30 +1,19 @@
-import express from 'express'
-import bp from 'body-parser'
+import express from "express";
+import Startup from "./Startup";
+import DbContext from "./db/DbConfig";
 
-let server = express()
+//create server & socketServer
+const app = express(); //add some stuff and things
+const port = process.env.PORT || 3000;
 
-const port = 3000
+//Establish Socket
+Startup.ConfigureGlobalMiddleware(app);
+Startup.ConfigureRoutes(app);
 
-server.use(bp.urlencoded({ extended: true }))
-server.use(bp.json())
+//Connect to AtlasDB
+DbContext.connect();
 
-
-// server.get('/v1/api/tacos', (req, res, next) => { res.send(["street tacos", "burrritos"]) })
-// server.get('/v1/api/tacos', (req, res, next) => { res.send(["Giant Tacos", "Giant burrritos"]) })
-import BurgerController from "./controllers/BurgerController"
-let burgerController = new BurgerController()
-
-server.use('/api/burgers', burgerController.router)
-
-
-
-
-server.use((req, res, next) => {
-  res.status(404).send("Route not found")
-})
-
-
-
-server.listen(port, () => {
-  console.log("Server is running on port: ", port, "You better go catch it!")
-})
+//Start Server
+app.listen(port, () => {
+  console.log("Server running on port:", port);
+});
